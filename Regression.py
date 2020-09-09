@@ -61,8 +61,8 @@ from sklearn.gaussian_process.kernels import WhiteKernel, ExpSineSquared
 
 ##  Read Data  ##
 
-#!wget https://raw.githubusercontent.com/AIScienceTutorial/Material_Science/master/Formation_Energies/Data.csv
-get_ipython().system('wget https://raw.githubusercontent.com/AIScienceTutorial/Material_Science/master/Formation_Energies/Data_norm.csv')
+#!wget https://raw.githubusercontent.com/Regression-on-DFT-Data/Data.csv
+get_ipython().system('wget https://raw.githubusercontent.com/Regression-on-DFT-Data/Data_norm.csv')
 
 #ifile  = open('Data.csv', "rt")
 ifile  = open('Data_norm.csv', "rt")
@@ -88,8 +88,8 @@ X = csvdata[:,6:]
 
     # Read CdX alloy data: CdTe_0.5Se_0.5 and CdSe_0.5S_0.5
 
-#!wget https://raw.githubusercontent.com/AIScienceTutorial/Material_Science/master/Formation_Energies/Outside.csv
-get_ipython().system('wget https://raw.githubusercontent.com/AIScienceTutorial/Material_Science/master/Formation_Energies/Outside_norm.csv')
+#!wget https://raw.githubusercontent.com/Regression-on-DFT-Data/Outside.csv
+get_ipython().system('wget https://raw.githubusercontent.com/Regression-on-DFT-Data/Outside_norm.csv')
 
 #ifile2  = open('Outside.csv', "rt")
 ifile2  = open('Outside_norm.csv', "rt")
@@ -116,8 +116,8 @@ n_out = prop_out.size
 
     # Read Entire Dataset
 
-#!wget https://raw.githubusercontent.com/AIScienceTutorial/Material_Science/master/Formation_Energies/X.csv
-get_ipython().system('wget https://raw.githubusercontent.com/AIScienceTutorial/Material_Science/master/Formation_Energies/X_norm.csv')
+#!wget https://raw.githubusercontent.com/Regression-on-DFT-Data/X.csv
+get_ipython().system('wget https://raw.githubusercontent.com/Regression-on-DFT-Data/X_norm.csv')
 
 #ifile3  = open('X.csv', "rt")
 ifile3  = open('X_norm.csv', "rt")
