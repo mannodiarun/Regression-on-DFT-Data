@@ -61,8 +61,8 @@ from sklearn.gaussian_process.kernels import WhiteKernel, ExpSineSquared
 
 ##  Read Data  ##
 
-#!wget https://raw.githubusercontent.com/Regression-on-DFT-Data/Data.csv
-get_ipython().system('wget https://raw.githubusercontent.com/Regression-on-DFT-Data/Data_norm.csv')
+#!wget https://raw.githubusercontent.com/AIScienceTutorial/Material_Science/master/Formation_Energies/Data.csv
+get_ipython().system('wget https://raw.githubusercontent.com/AIScienceTutorial/Material_Science/master/Formation_Energies/Data_norm.csv')
 
 #ifile  = open('Data.csv', "rt")
 ifile  = open('Data_norm.csv', "rt")
@@ -88,8 +88,8 @@ X = csvdata[:,6:]
 
     # Read CdX alloy data: CdTe_0.5Se_0.5 and CdSe_0.5S_0.5
 
-#!wget https://raw.githubusercontent.com/Regression-on-DFT-Data/Outside.csv
-get_ipython().system('wget https://raw.githubusercontent.com/Regression-on-DFT-Data/Outside_norm.csv')
+#!wget https://raw.githubusercontent.com/AIScienceTutorial/Material_Science/master/Formation_Energies/Outside.csv
+get_ipython().system('wget https://raw.githubusercontent.com/AIScienceTutorial/Material_Science/master/Formation_Energies/Outside_norm.csv')
 
 #ifile2  = open('Outside.csv', "rt")
 ifile2  = open('Outside_norm.csv', "rt")
@@ -116,8 +116,8 @@ n_out = prop_out.size
 
     # Read Entire Dataset
 
-#!wget https://raw.githubusercontent.com/Regression-on-DFT-Data/X.csv
-get_ipython().system('wget https://raw.githubusercontent.com/Regression-on-DFT-Data/X_norm.csv')
+#!wget https://raw.githubusercontent.com/AIScienceTutorial/Material_Science/master/Formation_Energies/X.csv
+get_ipython().system('wget https://raw.githubusercontent.com/AIScienceTutorial/Material_Science/master/Formation_Energies/X_norm.csv')
 
 #ifile3  = open('X.csv', "rt")
 ifile3  = open('X_norm.csv', "rt")
@@ -211,9 +211,6 @@ rfreg_opt.fit(X_train_fl, Prop_train_fl)
 Pred_train_fl = rfreg_opt.predict(X_train_fl)
 Pred_test_fl  = rfreg_opt.predict(X_test_fl)
 
-np.savetxt('Pred_train.csv', Pred_train_fl)
-np.savetxt('Pred_test.csv', Pred_test_fl)
-
 
 # ML2: Perform hyperparameter optimization when training random forest regression model. We define 5 hyperparameters to be tuned: number of estimators (number of trees in the forest), maximum depth of a tree, maximum features considered when looking for the best split, minimum number of samples required at a leaf node, and minimum number of samples required to split an internal node. All or some of these hyperparameters may be optimized by changing the rfregs_all definition loop. The Scikit-learn feature GridSearchCV enables looping through all combinations of hyperparameters and obtained the best set that minimizes test prediction error. 
 # 
@@ -238,9 +235,6 @@ rfreg_opt = GridSearchCV(RandomForestRegressor(), param_grid=param_grid)
 rfreg_opt.fit(X_train_fl, Prop_train_fl)
 Pred_train_fl = rfreg_opt.predict(X_train_fl)
 Pred_test_fl  = rfreg_opt.predict(X_test_fl)
-
-np.savetxt('Pred_train.csv', Pred_train_fl)
-np.savetxt('Pred_test.csv', Pred_test_fl)
 
 
 # ML3: Perform hyperparameter optimization (same as ML2) + cross-validation (used to take care of overfitting in machine learning). Change n-fold to define the type of cross-validation (CV), for eg. 5-fold CV (cv=5). GridSearchCV is used as before but defining cv=n means that at every point, the training data is divided into n folds; (n-1) sets are used at a time to train the model and the n-set (left out) is used for testing. The CV training and CV test errors are defined as averages over the n sets; the set of hyperparameters leading to minimum CV test error is taken as the optimal regressor. 
@@ -267,9 +261,6 @@ rfreg_opt.fit(X_train_fl, Prop_train_fl)
 Pred_train_fl = rfreg_opt.predict(X_train_fl)
 Pred_test_fl  = rfreg_opt.predict(X_test_fl)
 
-np.savetxt('Pred_train.csv', Pred_train_fl)
-np.savetxt('Pred_test.csv', Pred_test_fl)
-
 
 # To compare random forest with another ML technique:
 # 
@@ -295,8 +286,6 @@ krr_opt.fit(X_train_fl, Prop_train_fl)
 Pred_train_fl = krr_opt.predict(X_train_fl)
 Pred_test_fl  = krr_opt.predict(X_test_fl)
 
-np.savetxt('Pred_train.csv', Pred_train_fl)
-np.savetxt('Pred_test.csv', Pred_test_fl)
 
 
 # To compare random forest with another ML technique:
@@ -320,8 +309,6 @@ lassoreg.fit(X_train_fl, Prop_train_fl)
 Pred_train_fl = lassoreg.predict(X_train_fl)
 Pred_test_fl  = lassoreg.predict(X_test_fl)
 
-np.savetxt('Pred_train.csv', Pred_train_fl)
-np.savetxt('Pred_test.csv', Pred_test_fl)
 
 
 # Use the optimal regressor as obtained above (RF or KRR or LASSO) to make predictions on (a) the outside dataset, which contains additional DFT data generated for CdTeSe and CdSeS compounds (which were not included at all in Data.csv, the file used for training and testing the regression models), and (b) the entire chemical space, which contains all the DFT data points + the missing data points which make up ~ 80% of the total data points. Print out the predictions as .csv or .txt files if desired.
@@ -342,7 +329,7 @@ for i in range(0,prop_out.size):
 for i in range(0,prop_out.size):
     Pred_out_fl[i] = np.float(Pred_out[i])
 
-np.savetxt('Pred_out.csv', Pred_out_fl)
+#np.savetxt('Pred_out.csv', Pred_out_fl)
 
 
 
@@ -353,7 +340,7 @@ Pred_all_fl = [0.0]*Pred_all.size
 for i in range(0,Pred_all.size):
     Pred_all_fl[i] = np.float(Pred_all[i])
 
-np.savetxt('Pred_all.csv', Pred_all_fl)
+#np.savetxt('Pred_all.csv', Pred_all_fl)
 
 
 # If error bars are desired, they can be calculated from the random forest regressor based on the standard deviation of predictions from across the different estimators or trees in the forest. Change the percentile from 95 if needed. Error bars are estimated based on the RF predictors for the training, test, outside and entire datasets.
@@ -414,11 +401,6 @@ for i in range(n_te):
     err_up_test[i] = np.percentile(pp[:], 100 - (100 - percentile) / 2.)
 
 
-#np.savetxt('up_train.csv', err_up_train)
-#np.savetxt('down_train.csv', err_down_train)
-#np.savetxt('up_test.csv', err_up_test)
-#np.savetxt('down_test.csv', err_down_test)
-
 
 
     
@@ -454,8 +436,6 @@ for i in range(0,n_out):
     down_out[i] = Pred_out_fl[i] - err_down_out[i]
 
 
-#np.savetxt('up_out.csv', up_out)
-#np.savetxt('down_out.csv', down_out)
 
 
 
@@ -490,10 +470,6 @@ for i in range(0,n_all):
     up_all[i] = err_up_all[i] - Pred_all_fl[i]
     down_all[i] = Pred_all_fl[i] - err_down_all[i]
 
-
-
-#np.savetxt('up_all.csv', up_all)
-#np.savetxt('down_all.csv', down_all)
 
 
 # *This section is not very important and can be ignored:
